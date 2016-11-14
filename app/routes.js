@@ -1,0 +1,9 @@
+var config = require('./../config/db.js');
+
+module.exports = function(app) {
+    app.get('/api', function(req, res) {
+        res.json({msg: "API reporting for duty"});
+    });
+
+    app.use(require('./controllers/seekerCtrl.js'));
+};

@@ -1,0 +1,12 @@
+{
+  "name": "tjbackend",
+  "version": "1.0.0",
+  "description": "REST API for backend",
+  "dependencies": {
+    "express": "~4.5.1",
+	"mongoose": "latest",
+    "body-parser": "~1.4.2",
+    "method-override": "~2.0.2",
+    "morgan": "~1.7.0"
+  }
+}
