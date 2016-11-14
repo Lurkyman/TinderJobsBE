@@ -6,8 +6,9 @@ var empSchema = new Schema({
     img: String,
     info: String,
     mobnum: String,
-    email: String
-}):
+    email: String,
+    likes: [String]
+});
 
 empSchema.pre('save', function(next) {
     var self = this;
@@ -20,5 +21,7 @@ empSchema.pre('save', function(next) {
         }
     });
 });
+
+empSchema.collection = "employers";
 
 module.exports = mongoose.model('Employer', empSchema);

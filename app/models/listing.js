@@ -8,4 +8,6 @@ var listingSchema = new Schema({
     skillsReq: String
 });
 
+listingSchema.collection = 'listings';
+
 module.exports = mongoose.model('Listing', listingSchema);

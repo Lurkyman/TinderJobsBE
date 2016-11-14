@@ -2,7 +2,7 @@ var express     = require('express');
 var router      = express.Router();
 
 var Seeker      = require('./../models/jseeker.js');
-
+var AuthUser    = require('./../models/authm.js');
 
 // get all job seekers
 router.get('/api/seeker', function(req, res) {
@@ -26,12 +26,23 @@ router.post('/api/seeker', function(req, res) {
    seeker.skills = req.body.skills;
    seeker.mobnum = req.body.mobnum;
    seeker.email = req.body.email;
+   seeker.likes = [];
 
    seeker.save( function(err) {
         if(err)
             res.send(err);
+   });
 
-        res.json({msg: 'User created'});
+   var authUser = new AuthUser();
+   authUser.email = req.body.email;
+   authUser.password = req.body.password;
+
+   authUser.save( function(err) {
+       if(err){
+           res.send(err);
+           return;
+       }
+       res.json({msg:"User created."});
    });
 });
 

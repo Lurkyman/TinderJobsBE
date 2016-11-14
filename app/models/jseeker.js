@@ -10,7 +10,8 @@ var seekerSchema = new Schema({
     workexp: String,
     skills: String,
     mobnum: String,
-    email: String
+    email: String,
+    likes: [String]
 });
 
 seekerSchema.pre('save', function(next) {
@@ -20,9 +21,10 @@ seekerSchema.pre('save', function(next) {
             next();
         }
         else {
-            next(new Error("Seeker exists."));
+            next(new Error("User exists."));
         }
     });
 });
 
+seekerSchema.collection = 'seekers'
 module.exports = mongoose.model('Seeker', seekerSchema);
