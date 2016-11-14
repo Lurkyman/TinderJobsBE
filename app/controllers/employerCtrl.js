@@ -35,10 +35,9 @@ router.post('/api/employer', function(req, res) {
     authUser.email = req.body.email;
     authUser.password = req.body.password;
 
-    authUser.save( function(err) {
+    authUser.save(function(err) {
         if(err){
             res.send(err);
-            return;
         }
         res.json({msg:"User created."});
     });

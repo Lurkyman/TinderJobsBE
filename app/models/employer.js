@@ -8,12 +8,19 @@ var empSchema = new Schema({
     mobnum: String,
     email: String,
     likes: [String]
-});
+},
+{
+    collection: "employers"
+}
+);
+
+
+var employer = mongoose.model('Employer', empSchema);
 
 empSchema.pre('save', function(next) {
     var self = this;
-    empSchema.find({email: self.email}, function(err, docs) {
-        if(!docs.length()){
+    employer.find({email: self.email}, function(err, docs) {
+        if(!docs.length){
             next();
         }
         else {
@@ -22,6 +29,4 @@ empSchema.pre('save', function(next) {
     });
 });
 
-empSchema.collection = "employers";
-
-module.exports = mongoose.model('Employer', empSchema);
+module.exports = employer;

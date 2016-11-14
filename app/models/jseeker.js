@@ -14,10 +14,13 @@ var seekerSchema = new Schema({
     likes: [String]
 });
 
+seekerSchema.collection = 'seekers'
+var seeker = mongoose.model('Seeker', seekerSchema);
+
 seekerSchema.pre('save', function(next) {
     var self = this;
-    seekerSchema.find({email: self.email}, function(err, docs) {
-        if(!docs.length()){
+    seeker.find({email: self.email}, function(err, docs) {
+        if(!docs.length){
             next();
         }
         else {
@@ -26,5 +29,4 @@ seekerSchema.pre('save', function(next) {
     });
 });
 
-seekerSchema.collection = 'seekers'
-module.exports = mongoose.model('Seeker', seekerSchema);
+module.exports = seeker;
