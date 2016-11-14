@@ -12,7 +12,7 @@ var empSchema = new Schema({
 
 empSchema.pre('save', function(next) {
     var self = this;
-    seekerSchema.find({email: self.email}, function(err, docs) {
+    empSchema.find({email: self.email}, function(err, docs) {
         if(!docs.length()){
             next();
         }

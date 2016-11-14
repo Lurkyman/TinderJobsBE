@@ -8,5 +8,8 @@
     "body-parser": "~1.4.2",
     "method-override": "~2.0.2",
     "morgan": "~1.7.0"
+  },
+  "engines": {
+    "node":"6.4.0"
   }
 }
