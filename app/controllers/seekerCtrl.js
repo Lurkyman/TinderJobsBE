@@ -31,6 +31,7 @@ router.post('/api/seeker', function(req, res) {
    seeker.save( function(err) {
         if(err) {
             res.send(err);
+            return;
         }
         res.json({msg: "User created."});
    });
