@@ -29,13 +29,16 @@ router.post('/api/seeker', function(req, res) {
    seeker.likes = [];
 
    seeker.save( function(err) {
-        if(err)
+        if(err) {
             res.send(err);
+        }
+        res.json({msg: "User created."});
    });
 
    var authUser = new AuthUser();
    authUser.email = req.body.email;
    authUser.password = req.body.password;
+   authUser.type = req.body.type;
 
    authUser.save( function(err) {
        if(err){

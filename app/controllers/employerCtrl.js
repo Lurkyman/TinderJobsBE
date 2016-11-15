@@ -34,6 +34,7 @@ router.post('/api/employer', function(req, res) {
     var authUser = new AuthUser();
     authUser.email = req.body.email;
     authUser.password = req.body.password;
+    authUser.type = req.body.type;
 
     authUser.save(function(err) {
         if(err){

@@ -3,7 +3,8 @@ var Schema      = mongoose.Schema;
 
 var authSchema = new Schema({
     email: String,
-    password: String
+    password: String,
+    type: String
 });
 
 authSchema.collection = "auth";
