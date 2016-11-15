@@ -24,7 +24,7 @@ router.post('/login/', function(req, res) {
                             if(!seeker) {
                                 res.json({success: false, msg: "User info not found."});
                             } else {
-                                res.json({success: true, info: seeker, type: seeker.type});
+                                res.json({success: true, type: user.type, info: seeker});
                             }
                         });
                     } 
@@ -37,7 +37,7 @@ router.post('/login/', function(req, res) {
                             if(!employer) {
                                 res.json({success: false, msg: "User info not found."});
                             } else {
-                                res.json({success: true, info: employer, type: employer.type});
+                                res.json({success: true, type: user.type, info: employer});
                             }
                         });
                     }
