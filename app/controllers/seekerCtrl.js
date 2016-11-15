@@ -33,7 +33,6 @@ router.post('/api/seeker', function(req, res) {
             res.send(err);
             return;
         }
-        res.json({msg: "User created."});
    });
 
    var authUser = new AuthUser();
@@ -44,9 +43,9 @@ router.post('/api/seeker', function(req, res) {
    authUser.save( function(err) {
        if(err){
            res.send(err);
-           return;
+       } else {
+           res.json({msg:"User created."});
        }
-       res.json({msg:"User created."});
    });
 });
 

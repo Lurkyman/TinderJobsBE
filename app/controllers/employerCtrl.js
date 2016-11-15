@@ -39,8 +39,9 @@ router.post('/api/employer', function(req, res) {
     authUser.save(function(err) {
         if(err){
             res.send(err);
+        } else {
+            res.json({msg:"User created."});
         }
-        res.json({msg:"User created."});
     });
 });
 
