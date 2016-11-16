@@ -8,9 +8,10 @@ var likeTb = new Schema({
 
 likeTb.collection = "liketable";
 
+var likeMod = mongoose.model('liketbl', likeTb);
 likeTb.pre('save', function(next) {
     var self = this;
-   likeTb.findOne({liker: self.liker, likee: self.likee}, function(err,docs) {
+   likeMod.findOne({liker: self.liker, likee: self.likee}, function(err,docs) {
         if(!docs.length()){
             next();
         }
@@ -20,4 +21,4 @@ likeTb.pre('save', function(next) {
    }); 
 });
 
-module.exports = mongoose.model('liketbl', likeTb);
+module.exports = likeMod;
