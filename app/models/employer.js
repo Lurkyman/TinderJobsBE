@@ -8,7 +8,8 @@ var empSchema = new Schema({
     mobnum: String,
     email: String,
     likes: [String],
-    last_modified: Date
+    last_modified: Date,
+    dislikes: [String]
 },{
     timestamps: true
 });

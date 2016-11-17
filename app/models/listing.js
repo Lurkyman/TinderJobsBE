@@ -6,7 +6,9 @@ var listingSchema = new Schema({
     owner: String,
     jobdesc: String,
     skillsReq: String,
-    tags: [String]
+    tags: [String],
+    jobTitle: String,
+    expRequired: String
 },{
     timestamps: true
 });

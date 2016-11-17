@@ -16,13 +16,14 @@ router.get('/api/employers', function(req, res) {
 
 //create new employer
 router.post('/api/employer', function(req, res) {
-    var employer = new Employer();
-    employer.name = req.body.name;
-    employer.img = req.body.img;
-    employer.info = req.body.info;
-    employer.mobnum = req.body.mobnum;
-    employer.email = req.body.email;
-    employer.likes = [];
+    var employer        = new Employer();
+    employer.name       = req.body.name;
+    employer.img        = req.body.img;
+    employer.info       = req.body.info;
+    employer.mobnum     = req.body.mobnum;
+    employer.email      = req.body.email;
+    employer.likes      = [];
+    employer.dislikes   = [];
 
     employer.save( function(err) {
         if(err){
@@ -31,10 +32,10 @@ router.post('/api/employer', function(req, res) {
         }
     });
 
-    var authUser = new AuthUser();
-    authUser.email = req.body.email;
-    authUser.password = req.body.password;
-    authUser.type = "employer";
+    var authUser        = new AuthUser();
+    authUser.email      = req.body.email;
+    authUser.password   = req.body.password;
+    authUser.type       = "employer";
 
     authUser.save(function(err) {
         if(err){

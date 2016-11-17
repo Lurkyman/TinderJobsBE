@@ -12,7 +12,10 @@ var seekerSchema = new Schema({
     mobnum: String,
     email: String,
     likes: [String],
-    last_modified: Date
+    tags: [String],
+    dislikes: [String]
+},{
+    timestamps: true
 });
 
 seekerSchema.collection = 'seekers'
