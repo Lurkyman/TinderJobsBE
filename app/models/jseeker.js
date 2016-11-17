@@ -11,7 +11,8 @@ var seekerSchema = new Schema({
     skills: String,
     mobnum: String,
     email: String,
-    likes: [String]
+    likes: [String],
+    last_modified: Date
 });
 
 seekerSchema.collection = 'seekers'

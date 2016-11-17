@@ -3,9 +3,12 @@ var Schema      = mongoose.Schema;
 
 var listingSchema = new Schema({
     img: String,
-    compName: String,
+    owner: String,
     jobdesc: String,
-    skillsReq: String
+    skillsReq: String,
+    tags: [String]
+},{
+    timestamps: true
 });
 
 listingSchema.collection = 'listings';

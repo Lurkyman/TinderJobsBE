@@ -7,14 +7,13 @@ var empSchema = new Schema({
     info: String,
     mobnum: String,
     email: String,
-    likes: [String]
-},
-{
-    collection: "employers"
-}
-);
+    likes: [String],
+    last_modified: Date
+},{
+    timestamps: true
+});
 
-
+empSchema.collection = 'employers';
 var employer = mongoose.model('Employer', empSchema);
 
 empSchema.pre('save', function(next) {

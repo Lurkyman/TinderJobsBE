@@ -5,7 +5,7 @@ var Seeker      = require('./../models/jseeker.js');
 var AuthUser    = require('./../models/authm.js');
 
 // get all job seekers
-router.get('/api/seeker', function(req, res) {
+router.get('/api/seekers', function(req, res) {
     Seeker.find( function(err, seekers) {
         if(err)
             res.send(err);
@@ -27,6 +27,7 @@ router.post('/api/seeker', function(req, res) {
    seeker.mobnum = req.body.mobnum;
    seeker.email = req.body.email;
    seeker.likes = [];
+   seeker.tags = [];
 
    seeker.save( function(err) {
         if(err) {
@@ -38,7 +39,7 @@ router.post('/api/seeker', function(req, res) {
    var authUser = new AuthUser();
    authUser.email = req.body.email;
    authUser.password = req.body.password;
-   authUser.type = req.body.type;
+   authUser.type = "seeker";
 
    authUser.save( function(err) {
        if(err){
