@@ -6,13 +6,13 @@ var AuthUser    = require('./../models/authm.js');
 
 // get all job seekers
 router.get('/api/seekers', function(req, res) {
-        Seeker.find({updatedAt :{ $gte: new Date(req.body.timestamp) }}, function(err, seekers) {
-            if(err)
-                res.send(err);
+    Seeker.find({updatedAt :{ $gte: new Date(req.body.timestamp) }}, function(err, seekers) {
+        if(err)
+            res.send(err);
 
-            res.json(seekers);
-        });
+        res.json(seekers);
     });
+});
 
 // create new job seeker
 router.post('/api/seeker', function(req, res) {
@@ -32,7 +32,7 @@ router.post('/api/seeker', function(req, res) {
 
    seeker.save( function(err) {
         if(err) {
-            return next([err]);
+            return res.json(err);
         }
    });
 

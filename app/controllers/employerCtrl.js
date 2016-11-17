@@ -27,8 +27,7 @@ router.post('/api/employer', function(req, res) {
 
     employer.save( function(err) {
         if(err){
-            res.send(err);
-            return;
+            return res.send(err);
         }
     });
 
