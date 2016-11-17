@@ -6,7 +6,7 @@ var AuthUser     = require('./../models/authm.js');
 
 // get all employers
 router.get('/api/employers', function(req, res) {
-    Employer.find(function(err, employers) {
+    Employer.find({updatedAt: {$gte: new Date(req.query.timestamp)}},function(err, employers) {
         if(err)
             res.send(err);
 
@@ -25,16 +25,24 @@ router.post('/api/employer', function(req, res) {
     employer.likes      = [];
     employer.dislikes   = [];
 
-    employer.save( function(err) {
-        if(err){
-            return res.send(err);
-        }
-    });
-
     var authUser        = new AuthUser();
     authUser.email      = req.body.email;
     authUser.password   = req.body.password;
     authUser.type       = "employer";
+
+    employer.save( function(err) {
+        if(err){
+            res.send({success:false, msg: "User exists."});
+        } else {
+           authUser.save( function(err) {
+               if(err){
+                   res.send(err);
+               } else {
+                   res.json({msg:"User created."});
+               }
+           });
+        }
+    });
 
     authUser.save(function(err) {
         if(err){

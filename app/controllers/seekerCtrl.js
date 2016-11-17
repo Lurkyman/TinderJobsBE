@@ -6,11 +6,11 @@ var AuthUser    = require('./../models/authm.js');
 
 // get all job seekers
 router.get('/api/seekers', function(req, res) {
-    Seeker.find({updatedAt :{ $gte: new Date(req.body.timestamp) }}, function(err, seekers) {
+    Seeker.find({updatedAt :{ $gte: new Date(req.query.timestamp) }}, function(err, seekers) {
         if(err)
             res.send(err);
-
-        res.json(seekers);
+        else 
+            res.json(seekers);
     });
 });
 
@@ -28,26 +28,28 @@ router.post('/api/seeker', function(req, res) {
    seeker.email     = req.body.email;
    seeker.likes     = [];
    seeker.tags      = [];
-   seeker.dislikes  = []
-
-   seeker.save( function(err) {
-        if(err) {
-            return res.json(err);
-        }
-   });
+   seeker.dislikes  = [];
 
    var authUser      = new AuthUser();
    authUser.email    = req.body.email;
    authUser.password = req.body.password;
    authUser.type     = "seeker";
 
-   authUser.save( function(err) {
-       if(err){
-           res.send(err);
-       } else {
-           res.json({msg:"User created."});
-       }
+   seeker.save( function(err) {
+        if(err) {
+            res.send({success:false, msg: "User exists."});
+        } else {
+           authUser.save( function(err) {
+               if(err){
+                   res.send(err);
+               } else {
+                   res.json({msg:"User created."});
+               }
+           });
+        }
    });
+
+
 });
 
 // get individual seeker
