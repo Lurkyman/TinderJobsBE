@@ -6,7 +6,9 @@ var AuthUser     = require('./../models/authm.js');
 
 // get all employers
 router.get('/api/employers', function(req, res) {
-    Employer.find({updatedAt: {$gte: new Date(req.query.timestamp)}},function(err, employers) {
+
+    console.log(req.query.timestamp);
+    Employer.find({updatedAt: {$gte: new Date(parseInt(req.query.timestamp))}},function(err, employers) {
         if(err)
             res.send(err);
 

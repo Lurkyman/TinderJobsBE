@@ -6,7 +6,7 @@ var AuthUser    = require('./../models/authm.js');
 
 // get all job seekers
 router.get('/api/seekers', function(req, res) {
-    Seeker.find({updatedAt :{ $gte: new Date(req.query.timestamp) }}, function(err, seekers) {
+    Seeker.find({updatedAt:{ $gt: new Date(parseInt(req.query.timestamp)) }}, function(err, seekers) {
         if(err)
             res.send(err);
         else 
@@ -16,7 +16,7 @@ router.get('/api/seekers', function(req, res) {
 
 // create new job seeker
 router.post('/api/seeker', function(req, res) {
-   var seeker =  new Seeker();
+   var seeker       =  new Seeker();
    seeker.salut     = req.body.salut;
    seeker.fname     = req.body.fname;
    seeker.lname     = req.body.lname;
