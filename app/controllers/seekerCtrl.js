@@ -27,7 +27,7 @@ router.post('/api/seeker', function(req, res) {
    seeker.mobnum    = req.body.mobnum;
    seeker.email     = req.body.email;
    seeker.likes     = [];
-   seeker.tags      = [];
+   seeker.tags      = req.body.tags;
    seeker.dislikes  = [];
 
    var authUser      = new AuthUser();
@@ -43,7 +43,7 @@ router.post('/api/seeker', function(req, res) {
                if(err){
                    res.send(err);
                } else {
-                   res.json({msg:"User created."});
+                   res.json({success: "true", type: "seeker", info: seeker});
                }
            });
         }
