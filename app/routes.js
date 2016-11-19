@@ -10,4 +10,5 @@ module.exports = function(app) {
     app.use(require('./controllers/listingCtrl.js'));
     app.use(require('./controllers/liketbCtrl.js'));
     app.use(require('./controllers/authCtrl.js'));
+    app.use(require('./controllers/matchCtrl.js'));
 };
