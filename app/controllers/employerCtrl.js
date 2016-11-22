@@ -40,17 +40,9 @@ router.post('/api/employer', function(req, res) {
                if(err){
                    res.send(err);
                } else {
-                   res.json({msg:"User created."});
+                   res.json({success: "true", type: "employer", info: employer});
                }
            });
-        }
-    });
-
-    authUser.save(function(err) {
-        if(err){
-            res.send(err);
-        } else {
-            res.json({msg:"User created."});
         }
     });
 });
