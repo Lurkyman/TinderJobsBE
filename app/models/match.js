@@ -4,6 +4,8 @@ var Schema          = mongoose.Schema;
 var matchSchema = new Schema({
     seeker: String,
     employer: String
+},{
+    timestamps: true
 });
 
 matchSchema.collection = "matches";

@@ -4,7 +4,7 @@ var router      = express.Router();
 var Match       = require('./../models/match.js');
 
 router.get('/api/matches', function(req, res) {
-    Match.find(function(err, matches) {
+    Match.find({updatedAt: {$gte: new Date(parseInt(req.query.timestamp))}}, function(err, matches) {
         if(err)
             res.send(err);
 

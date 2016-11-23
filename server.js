@@ -30,6 +30,7 @@ io.on('connection', function(socket) {
     socket.on('match', function(data) {
         console.log(data);
         socket.emit("Ack from server.");
+        socket.broadcast.emit("match", data);
     });
 });
 
