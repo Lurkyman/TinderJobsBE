@@ -21,43 +21,49 @@ router.post('/api/like', function(req, res) {
     User.findOne({email: like.liker}, function(err, user) {
         if(err)
             return res.json({success:false, msg: err});
-    
-        if(!user) return res.json({success: false, msg: "user not found"});
+        else if(!user) return res.json({success: false, msg: "user not found"});
+        else {
+            console.log(user.type);
+            type = user.type;
+            console.log(type);
 
-        console.log(user.type);
-        type = user.type;
-        console.log(type);
+            liketype = req.body.type + "s";
 
-        if(type == "seeker") {
-            Seeker.findOneAndUpdate({email: like.liker}, 
-                    {$push: {[like.type]: like.likee}},
-                    {safe: true},
-                    function(err, seeker) {
-                        if(err)
-                            res.json({success:"false", msg:"Something went wrong."});      
-                        if(seeker){
-                            res.json({success:"true", updated: seeker});
-                        } else {
-                            res.json({success:"false", msg: "User not found."}); 
-                        }
-                    }    
-            );
-        } else if(type == "employer") {
-            Employer.findOneAndUpdate({email: like.liker}, 
-                    {$push: {[like.type]: like.likee}},
-                    {safe: true},
-                    function(err, employer) {
-                        if(err)
-                            res.json({success:"false", msg:"Something went wrong."});      
-                        if(employer){
-                            res.json({success:"true", updated: employer});
-                        } else {
-                            res.json({success:"false", msg: "User not found."}); 
-                        }
-                    }    
-            );
-        } else {
-            res.json({success:false, msg: "User type invalid."});
+            if(type == "seeker") {
+                Seeker.findOneAndUpdate({email: like.liker}, 
+                        {$push: {[liketype]: like.likee}},
+                        {safe: true},
+                        function(err, seeker) {
+                            if(err)
+                                res.json({success:"false", msg:"Something went wrong.", error: err});      
+                            else {
+                                if(seeker){
+                                    res.json({success:"true", updated: seeker});
+                                } else {
+                                    res.json({success:"false", msg: "User not found."}); 
+                                }
+                            }
+                        }    
+                );
+            } else if(type == "employer") {
+                Employer.findOneAndUpdate({email: like.liker}, 
+                        {$push: {[like.type]: like.likee}},
+                        {safe: true},
+                        function(err, employer) {
+                            if(err)
+                                res.json({success:"false", msg:"Something went wrong."});      
+                            else {
+                                if(employer){
+                                    res.json({success:"true", updated: employer});
+                                } else {
+                                    res.json({success:"false", msg: "User not found."}); 
+                                }
+                            }
+                        }    
+                );
+            } else {
+                res.json({success:false, msg: "User type invalid."});
+            }
         }
     });
 
