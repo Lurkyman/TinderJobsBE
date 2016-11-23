@@ -26,6 +26,11 @@ server.listen(port, function(){
 
 io.on('connection', function(socket) {
     console.log("Client connected.");
+
+    socket.on('match', function(data) {
+        console.log(data);
+        socket.emit("Ack from server.");
+    });
 });
 
 exports = module.exports = app;
