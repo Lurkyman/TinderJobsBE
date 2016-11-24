@@ -24,13 +24,42 @@ server.listen(port, function(){
     console.log('Magic happens on port ' + port);
 });
 
+/************************ SOCKET IMPLEMENTATION *******************************/
+var Chat = require('./app/models/chat.js');
+var Msg = require('./app/models/chatmsg.js');
+
 io.on('connection', function(socket) {
     console.log("Client connected.");
 
     socket.on('match', function(data) {
-        console.log(data);
+        var roomRaw = data.seeker + data.employer;
+        roomRaw = roomRaw.replace(/[^a-zA-Z0-9]/g, '');
+
+        var room = "";
+
+        console.log(roomRaw.length);
+        var i;
+        for(i=0; i < roomRaw.length; i+=2){
+            console.log(i);
+            room = room + roomRaw.charAt(i);
+        }
+
+        var sendData = {seeker: data.seeker, employer: data.employer, room: room};
+
+        console.log(sendData);
         socket.emit("Ack from server.");
-        socket.broadcast.emit("match", data);
+        socket.broadcast.emit("match", sendData);
+    });
+
+    socket.on('recMessage', function(data) {
+        var room = data.room;
+
+        var message = new Msg();
+        message.msg = data.msg;
+        message.timestamp = data.timestamp;
+        message.sender = data.sender;
+
+        socket.to(room).emit('sendMessage', message);
     });
 });
 
