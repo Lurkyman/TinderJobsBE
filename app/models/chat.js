@@ -3,6 +3,8 @@ var Schema          = mongoose.Schema;
 
 var chatSchema = new Schema({
     room: String,
+    seeker: String,
+    employer: String,
     messages: [{
         timestamp: Date,
         sender:String, 
@@ -10,6 +12,8 @@ var chatSchema = new Schema({
     }],
 });
 
-var chat = mongoose.model('Chat', chatSchema);
+chatSchema.collection = "chats";
+
+var chat = mongoose.model('chat', chatSchema);
 
 module.exports = chat;

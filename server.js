@@ -24,7 +24,9 @@ server.listen(port, function(){
     console.log('Magic happens on port ' + port);
 });
 
+
 /************************ SOCKET IMPLEMENTATION *******************************/
+
 var Chat = require('./app/models/chat.js');
 var Msg = require('./app/models/chatmsg.js');
 
@@ -51,16 +53,16 @@ io.on('connection', function(socket) {
         socket.broadcast.emit("match", sendData);
     });
 
-    socket.on('recMessage', function(data) {
-        var room = data.room;
-
-        var message = new Msg();
-        message.msg = data.msg;
-        message.timestamp = data.timestamp;
-        message.sender = data.sender;
-
-        socket.to(room).emit('sendMessage', message);
+    socket.on('send', function(data) {
+        console.log(data.sender + " sending message to " + data.room);
+        socket.to(data.room).emit('message', data);
     });
+
+    socket.on('subscribe', function(data) {
+        console.log("Socket joined " + data.room);
+        socket.join(data.room);
+    });
+
 });
 
 exports = module.exports = app;
