@@ -63,6 +63,10 @@ io.on('connection', function(socket) {
         socket.join(data.room);
     });
 
+    socket.on('like', function(data) {
+        socket.broadcast('like', {liker: data.liker, likee: data.likee});
+    });
+
 });
 
 exports = module.exports = app;
